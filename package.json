@@ -1,0 +1,92 @@
+{
+  "name": "yousef-perfumes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "يوسف للعطور — برنامج Desktop محلي Offline باستخدام Electron وPGlite، مع الإبقاء على Backend Express ووضع PostgreSQL للخادم.",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "bash scripts/dev-up.sh",
+    "migrate": "node server/migrate.js",
+    "seed": "node scripts/seed-demo.js",
+    "wipe": "node scripts/wipe.js",
+    "test": "node tests/api.test.js",
+    "test:e2e": "node tests/e2e.test.js",
+    "screens": "node tests/screens.js",
+    "desktop": "electron .",
+    "desktop:dev": "electron .",
+    "build:win": "electron-builder --win nsis",
+    "test:offline": "node tests/offline.test.js"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
+  },
+  "keywords": [
+    "arabic",
+    "desktop",
+    "electron",
+    "express",
+    "inventory",
+    "offline",
+    "perfume",
+    "pglite",
+    "pos",
+    "postgresql",
+    "rtl"
+  ],
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "ly.yousefperfumes.desktop",
+    "productName": "Yousef Perfumes",
+    "asar": true,
+    "directories": {
+      "output": "release",
+      "buildResources": "resources"
+    },
+    "files": [
+      "**/*",
+      "!tests/**",
+      "!docs/**",
+      "!screens/**",
+      "!scripts/**",
+      "!data/**",
+      "!.desktop-dev/**",
+      "!release/**",
+      "!coverage/**",
+      "!*.log"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "resources/app.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowElevation": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "يوسف للعطور",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "artifactName": "Yousef-Perfumes-Setup-${version}.${ext}"
+  }
+}
